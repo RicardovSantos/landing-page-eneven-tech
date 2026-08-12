@@ -1,0 +1,42 @@
+# Eneven Tech — Landing Pages
+
+> Criação de landing pages de alta conversão com otimização para Google (SEO) e
+> para buscadores de inteligência artificial (GEO, AEO e LLMs). Empresa sediada
+> na Penha, São Paulo, atendendo clientes em todo o Brasil.
+
+## Serviço
+
+- **Nome:** Landing Page Premium
+- **Preço:** R$ 397,00 (ou 12x de R$ 43,00)
+- **Pagamento:** 20% na aprovação do briefing, 80% após a página estar aprovada e no ar
+- **Prazo:** até 72 horas após o recebimento de todo o material do cliente
+- **Garantia:** 30 dias de ajustes sem custo após a publicação, dentro da estrutura entregue
+- **Adicional opcional:** agendamento automático integrado à página (valor sob consulta)
+
+## O que está incluído
+
+- Página única desenhada sob medida para o negócio do cliente
+- Design responsivo, construído primeiro para celular
+- Copywriting orientado a conversão
+- SEO técnico (estrutura semântica, meta tags, Open Graph, schema.org)
+- GEO — otimização para ser citada por assistentes de IA
+- AEO — respostas objetivas para featured snippets e busca por voz
+- Arquivo llms.txt para apresentação do negócio a modelos de linguagem
+- Botões de WhatsApp com mensagem pré-preenchida
+- 30 dias de garantia
+
+## Não incluído no valor
+
+- Hospedagem (disponível com a Eneven Tech, valor sob consulta)
+- Registro de domínio (registrado em nome do cliente, com a Eneven Tech como suporte técnico)
+
+## Contato
+
+- **WhatsApp:** +55 11 98824-0918
+- **E-mail:** atendimento@eneven.com.br
+- **Site:** https://eneven.com.br
+- **Landing pages:** https://lp.eneven.com.br
+
+## Atendimento
+
+Todo o Brasil, de forma remota. Sede em Penha, São Paulo — SP.
