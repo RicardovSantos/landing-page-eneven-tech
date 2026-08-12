@@ -76,25 +76,6 @@
     alvos.forEach(function (el) { obs.observe(el); });
   }
 
-  /* ---------- Conversa com a IA: "digita" e responde ---------- */
-  var chat = document.querySelector('.chat');
-
-  if (chat) {
-    if (reduz || !('IntersectionObserver' in window)) {
-      chat.classList.add('is-live');
-    } else {
-      var obsChat = new IntersectionObserver(function (entradas) {
-        entradas.forEach(function (entrada) {
-          if (entrada.isIntersecting) {
-            setTimeout(function () { chat.classList.add('is-live'); }, 1400);
-            obsChat.unobserve(entrada.target);
-          }
-        });
-      }, { threshold: 0.45 });
-      obsChat.observe(chat);
-    }
-  }
-
   /* ---------- FAQ: um aberto por vez ---------- */
   var faqs = document.querySelectorAll('.faq-item');
   faqs.forEach(function (item) {

@@ -380,68 +380,13 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
   font-family:var(--fd);font-weight:600;font-size:1.03rem;color:var(--txt);
 }
 
-/* Mock de conversa com IA */
-.chat{
-  border-radius:var(--r-lg);
-  background:rgba(13,16,32,.78);
-  border:1px solid var(--linha);
-  box-shadow:0 24px 60px rgba(0,0,0,.5);
-  overflow:hidden;
+.tensao-vis{display:flex;flex-direction:column;align-items:center}
+.tensao-foto{
+  width:100%;max-width:340px;height:auto;
+  border-radius:28px;
+  filter:drop-shadow(0 30px 60px rgba(0,0,0,.55)) drop-shadow(0 0 40px rgba(97,23,196,.18));
 }
-.chat-top{
-  display:flex;align-items:center;gap:6px;
-  padding:13px 18px;border-bottom:1px solid var(--linha);
-  background:rgba(8,10,20,.6);
-}
-.chat-top span{width:9px;height:9px;border-radius:50%;background:var(--txt-3);opacity:.45}
-.chat-top p{
-  margin-left:10px;font-family:var(--fm);font-size:.68rem;
-  color:var(--txt-3);letter-spacing:.05em;
-}
-.chat-body{padding:20px;display:flex;flex-direction:column;gap:14px}
-.chat-msg{
-  padding:13px 17px;border-radius:15px;font-size:.92rem;max-width:92%;
-}
-.chat-msg.is-user{
-  align-self:flex-end;
-  background:var(--grad);color:#fff;
-  border-bottom-right-radius:5px;font-weight:500;
-}
-.chat-msg.is-ai{
-  align-self:flex-start;width:100%;
-  background:rgba(139,77,232,.09);
-  border:1px solid var(--linha);
-  border-bottom-left-radius:5px;color:var(--txt-2);
-}
-.chat-typing{display:flex;gap:5px;padding:3px 0}
-.chat-typing i{
-  width:6px;height:6px;border-radius:50%;background:var(--azul-claro);opacity:.5;
-  animation:dots 1.4s ease-in-out infinite;
-}
-.chat-typing i:nth-child(2){animation-delay:.18s}
-.chat-typing i:nth-child(3){animation-delay:.36s}
-@keyframes dots{0%,60%,100%{opacity:.28;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
 
-.chat-answer{display:none}
-.chat.is-live .chat-typing{display:none}
-.chat.is-live .chat-answer{display:block;animation:fadeUp .5s ease both}
-.chat-answer p{margin-bottom:10px;font-size:.9rem}
-.chat-answer ul{display:flex;flex-direction:column;gap:8px}
-.chat-answer li{
-  padding:10px 14px;border-radius:11px;
-  background:rgba(8,10,20,.55);font-size:.89rem;
-  border:1px solid transparent;
-}
-.chat-answer li.is-hit{
-  border-color:rgba(37,211,102,.42);
-  background:rgba(37,211,102,.09);color:var(--txt);font-weight:600;
-  display:flex;align-items:center;gap:10px;
-}
-.chat-badge{
-  font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
-  padding:3px 8px;border-radius:5px;
-  background:var(--wpp);color:#04140a;font-weight:700;
-}
 .chat-note{
   margin-top:16px;text-align:center;
   font-size:.87rem;color:var(--txt-3);font-style:italic;
@@ -741,8 +686,12 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
    ============================================================ */
 .sec-prova .sec-head{text-align:center;display:flex;flex-direction:column;align-items:center}
 
+.equipe{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;
+  margin-bottom:24px;
+}
 .autor{
-  margin-bottom:24px;padding:clamp(20px,3.4vw,32px);
+  padding:clamp(20px,3.4vw,32px);
   border-radius:var(--r-lg);
   display:flex;gap:clamp(18px,3vw,28px);align-items:center;
   background:linear-gradient(120deg,rgba(97,23,196,.16),rgba(33,168,228,.07));
@@ -928,7 +877,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
   .radar{max-width:330px}
   .entrega-grid{grid-template-columns:repeat(2,1fr)}
   .depos{grid-template-columns:1fr;max-width:600px;margin:0 auto}
-  .autor{max-width:600px;margin-inline:auto}
+  .equipe{grid-template-columns:1fr;max-width:600px;margin-inline:auto}
   .hero-foto img{width:74%;opacity:.36}
 }
 
@@ -969,8 +918,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
   }
 
   .tensao-kicker{padding:15px 17px;font-size:.97rem}
-  .chat-body{padding:15px}
-  .chat-msg{font-size:.87rem;padding:11px 14px}
+  .tensao-foto{max-width:260px}
 
   .siglas{grid-template-columns:1fr}
   .entrega-grid{grid-template-columns:1fr}
@@ -1007,6 +955,4 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
   }
   .reveal{opacity:1;transform:none}
   .radar-sweep,.pulse-beam,.wpp-ping{display:none}
-  .chat-answer{display:block}
-  .chat-typing{display:none}
 }

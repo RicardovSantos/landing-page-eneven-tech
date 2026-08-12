@@ -1,9 +1,21 @@
 # Prompts de imagem — LP Ads Eneven Tech
 
 Cole cada prompt no ChatGPT (GPT-4o / DALL·E) ou no Midjourney.
-**Todas as imagens são opcionais** — a página funciona 100% sem elas, porque o
-visual foi construído com CSS. Use estas imagens quando quiser reforçar a
-seção com uma foto real.
+O visual base foi construído com CSS, então a página funciona sem as imagens —
+elas entram para reforçar cada seção com uma foto real.
+
+## Status — o que já está aplicado na página
+
+| # | Arquivo | Onde aparece | Status |
+|---|---------|--------------|--------|
+| 1 | `og-lp.jpg` | `og:image` (miniatura do WhatsApp) | ✅ no ar |
+| 2 | `hero.png` | fundo do `.hero`, ancorado à direita | ✅ no ar |
+| 3 | `sec-entrega.png` | vitrine em "O que você recebe" | ✅ no ar |
+| 4 | `foto-Desenvolvedor-Ricardo.png` | bloco "quem faz", antes dos depoimentos | ✅ no ar |
+
+Como as três novas foram geradas em `.png`, o próximo passo de performance é
+converter para `.webp` (veja a nota no fim do arquivo) e trocar a extensão em
+`index.html`.
 
 ## Identidade que deve aparecer em todas
 - Roxo `#6117C4` · Azul `#21A8E4` · Fundo quase-preto azulado `#080A14`
@@ -94,22 +106,27 @@ No text, no letters, no logos, no watermark. --ar 1:1
 
 ---
 
-## Como aplicar a imagem de fundo no hero (item 2)
+## Como as imagens estão aplicadas hoje
 
-1. Salve a imagem em `assets/img/hero-bg.webp`
-2. Adicione ao final de `assets/css/style.css`:
+**Hero (`.hero-foto` no CSS):** a foto não é um fundo chapado. Ela fica ancorada
+à direita ocupando ~62% da largura, com duas máscaras combinadas — uma dissolve
+a borda esquerda (para o título centralizado nunca disputar espaço com o rosto)
+e outra apaga o rodapé da imagem. No celular ela vira só ambientação: sobe para
+o topo, ocupa a largura toda e cai para 26% de opacidade.
 
-```css
-.hero::before{
-  content:"";
-  position:absolute; inset:0; z-index:-1;
-  background:url('../img/hero-bg.webp') center/cover no-repeat;
-  opacity:.15;
-  mask-image:linear-gradient(180deg,#000 0%,transparent 85%);
-  -webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 85%);
-}
-```
+Se quiser mais ou menos presença da foto, mexa só na `opacity` de
+`.hero-foto img` — o valor atual é `.4` no desktop.
 
-Converta para `.webp` antes de subir (https://squoosh.app) e mantenha cada
-imagem **abaixo de 200 KB** para não perder velocidade — velocidade conta
-pontos no Google Ads e derruba o custo por clique.
+**Vitrine (`.entrega-vitrine`):** card com brilho roxo no topo. Como o fundo da
+imagem é preto, ela se funde com o card e os aparelhos parecem flutuar.
+
+**Autor (`.autor`):** retrato circular ao lado do texto, logo antes dos
+depoimentos — é o que dá rosto ao "eu" usado na página inteira. Empilha em
+coluna no celular.
+
+## Pendência de performance
+
+As três imagens novas ainda são `.png`. Converta para `.webp`
+(https://squoosh.app), mantenha cada uma **abaixo de 200 KB** e troque a
+extensão nos `src` do `index.html`. Velocidade conta pontos no Google Ads e
+derruba o custo por clique.
