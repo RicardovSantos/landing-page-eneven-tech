@@ -1096,7 +1096,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
   .hero{padding-top:118px}
   /* no celular a foto sobe para o topo e só ambienta o fundo */
   .hero-foto img{
-    width:100%;height:56%;opacity:.26;object-position:64% 26%;
+    width:100%;height:56%;opacity:.26;object-position:100% 26%;
     -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 42%,transparent 100%);
             mask-image:linear-gradient(180deg,#000 0%,#000 42%,transparent 100%);
   }
