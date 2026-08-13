@@ -103,19 +103,33 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
 .lead-center{margin-left:auto;margin-right:auto;text-align:center}
 .lead em{color:var(--txt);font-style:italic}
 
+/* Eyebrow editorial: traço em degradê + texto em degradê da marca */
 .eyebrow{
-  display:inline-flex;align-items:flex-start;gap:9px;
-  font-family:var(--fm);font-size:.735rem;font-weight:500;
+  display:inline-flex;align-items:center;gap:13px;
+  font-family:var(--fm);font-size:.735rem;font-weight:600;
   letter-spacing:.16em;text-transform:uppercase;
-  color:var(--azul-claro);margin-bottom:20px;
+  margin-bottom:20px;
 }
+/* traços espelhados: somem nas pontas e ganham cor ao encostar no texto.
+   O da direita sai do roxo, seguindo onde o degradê do texto termina. */
 .eyebrow-dot{
-  flex-shrink:0;margin-top:.42em;
-  width:7px;height:7px;border-radius:50%;background:var(--azul-claro);
-  box-shadow:0 0 0 4px rgba(33,168,228,.18);
-  animation:breathe 2.6s ease-in-out infinite;
+  flex-shrink:0;width:28px;height:1.5px;border-radius:2px;
+  background:linear-gradient(90deg,transparent,var(--azul-claro));
 }
-@keyframes breathe{50%{box-shadow:0 0 0 9px rgba(33,168,228,0)}}
+.eyebrow::after{
+  content:"";flex-shrink:0;width:28px;height:1.5px;border-radius:2px;
+  background:linear-gradient(90deg,var(--roxo-claro),transparent);
+}
+/* o degradê vive no span do texto: em .eyebrow ele cobriria o traço */
+.eyebrow-txt{
+  background:linear-gradient(100deg,var(--azul-claro) 0%,var(--roxo-claro) 100%);
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;
+}
+/* navegador sem background-clip:text mantém o texto legível */
+@supports not ((background-clip:text) or (-webkit-background-clip:text)){
+  .eyebrow-txt{color:var(--azul-claro)}
+}
 
 /* ---------- Layout ---------- */
 .wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 22px}
@@ -426,31 +440,72 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
 
 .radar-core{
   position:relative;z-index:3;
-  width:31%;aspect-ratio:1;border-radius:50%;
-  display:grid;place-items:center;text-align:center;
+  width:34%;aspect-ratio:1;border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:7px;text-align:center;
   background:radial-gradient(circle at 32% 28%,var(--roxo-claro),var(--roxo) 72%);
   box-shadow:0 0 40px rgba(97,23,196,.62),inset 0 2px 12px rgba(255,255,255,.22);
   font-family:var(--fd);font-weight:700;font-size:clamp(.72rem,1.7vw,.88rem);
   color:#fff;line-height:1.25;
 }
 
+/* Mini-navegador dentro do núcleo: deixa claro que o centro é UM SITE */
+.radar-browser{
+  display:block;width:52%;border-radius:5px;overflow:hidden;
+  background:rgba(255,255,255,.96);
+  box-shadow:0 3px 10px rgba(8,6,24,.34);
+}
+.radar-browser-bar{
+  display:flex;align-items:center;gap:3px;
+  padding:4px 5px;background:rgba(24,20,48,.14);
+}
+.radar-browser-bar i{
+  width:3.5px;height:3.5px;border-radius:50%;
+  background:rgba(52,40,92,.5);
+}
+.radar-browser-body{
+  display:flex;flex-direction:column;gap:3px;
+  padding:6px 6px 8px;
+}
+.radar-browser-body b{
+  display:block;height:3px;border-radius:2px;
+  background:var(--roxo);opacity:.75;
+}
+.radar-browser-body b:nth-child(1){width:78%;height:4px;opacity:.9}
+.radar-browser-body b:nth-child(2){width:100%}
+.radar-browser-body b:nth-child(3){width:56%}
+
+.radar-core-label{
+  font-family:var(--fd);font-weight:700;
+  font-size:clamp(.62rem,1.45vw,.78rem);
+  letter-spacing:.01em;color:#fff;
+}
+
 .radar-sat{
   position:absolute;z-index:4;
-  font-family:var(--fm);font-size:clamp(.62rem,1.4vw,.72rem);font-weight:500;
-  padding:6px 12px;border-radius:999px;white-space:nowrap;
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  padding:8px 12px;border-radius:14px;white-space:nowrap;
   background:rgba(13,16,32,.9);
   border:1px solid var(--linha-forte);
-  color:var(--txt-2);
   backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
   animation:satFloat 4.5s ease-in-out infinite;
 }
-.sat-1{top:5%;left:50%;transform:translateX(-50%)}
-.sat-2{top:47%;right:-4%;transform:translateY(-50%);animation-delay:.5s;
-  border-color:rgba(33,168,228,.5);color:var(--azul-claro)}
-.sat-3{bottom:5%;left:50%;transform:translateX(-50%);animation-delay:1s;
-  border-color:rgba(33,168,228,.5);color:var(--azul-claro)}
-.sat-4{top:47%;left:-4%;transform:translateY(-50%);animation-delay:1.5s;
-  border-color:rgba(33,168,228,.5);color:var(--azul-claro)}
+.sat-logo{
+  display:block;
+  width:clamp(19px,4.2vw,25px);height:clamp(19px,4.2vw,25px);
+}
+.sat-nome{
+  font-family:var(--fm);font-size:clamp(.58rem,1.3vw,.68rem);
+  font-weight:500;line-height:1;color:var(--txt-2);
+}
+.sat-1{top:2%;left:50%;transform:translateX(-50%)}
+.sat-2{top:47%;right:-7%;transform:translateY(-50%);animation-delay:.5s;
+  border-color:rgba(33,168,228,.5)}
+.sat-3{bottom:2%;left:50%;transform:translateX(-50%);animation-delay:1s;
+  border-color:rgba(33,168,228,.5)}
+.sat-4{top:47%;left:-7%;transform:translateY(-50%);animation-delay:1.5s;
+  border-color:rgba(33,168,228,.5)}
+.sat-2 .sat-nome,.sat-3 .sat-nome,.sat-4 .sat-nome{color:var(--azul-claro)}
 @keyframes satFloat{50%{opacity:.72}}
 
 /* Cards das siglas */
@@ -469,6 +524,23 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
   background:rgba(139,77,232,.16);color:var(--roxo-claro);
 }
 .sigla.is-new .sigla-tag{background:rgba(33,168,228,.16);color:var(--azul-claro)}
+
+/* Cards do diferencial: borda destacada + tag flutuante no topo */
+.sigla.is-new{
+  position:relative;
+  padding-top:30px;
+  border-color:rgba(33,168,228,.42);
+  background:linear-gradient(180deg,rgba(33,168,228,.06),rgba(18,22,42,.52));
+}
+.sigla.is-new:hover{border-color:var(--azul-claro)}
+.sigla-flag{
+  position:absolute;top:0;left:24px;transform:translateY(-50%);
+  font-family:var(--fm);font-size:.6rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 12px;border-radius:999px;
+  background:var(--grad);color:#fff;white-space:nowrap;
+  box-shadow:0 4px 14px rgba(97,23,196,.45);
+}
 .sigla h3{font-size:1.06rem;margin-bottom:9px}
 .sigla p{font-size:.9rem;color:var(--txt-2);line-height:1.6}
 .sigla-status{
@@ -482,7 +554,6 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
   margin-top:44px;text-align:center;
   font-size:1rem;color:var(--txt-2);
 }
-.geo-foot .link-wpp{display:block;margin-top:10px}
 
 /* ============================================================
    ENTREGA
@@ -522,23 +593,6 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
   margin-top:14px;font-size:.88rem;color:var(--txt-3);
 }
 
-.addon{
-  margin-top:20px;padding:clamp(24px,4vw,36px);
-  border-radius:var(--r-lg);
-  display:flex;gap:24px;align-items:flex-start;
-  background:rgba(13,16,32,.6);
-  border:1px dashed var(--linha-forte);
-}
-.addon-mark{
-  flex-shrink:0;width:52px;height:52px;border-radius:15px;
-  display:grid;place-items:center;
-  background:var(--grad);color:#fff;
-  font-family:var(--fd);font-size:1.7rem;font-weight:700;line-height:1;
-  box-shadow:0 8px 24px rgba(97,23,196,.4);
-}
-.addon h3{font-size:1.16rem;margin-bottom:9px}
-.addon p{font-size:.95rem;color:var(--txt-2);max-width:64ch}
-
 /* ============================================================
    COMO FUNCIONA — TIMELINE 72H
    ============================================================ */
@@ -549,22 +603,31 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
 .etapas{
   position:relative;max-width:760px;margin:0 auto;
   display:flex;flex-direction:column;
-  padding-left:36px;
+  padding-left:58px;
 }
+/* trilho alinhado ao centro dos marcadores (17px = metade do círculo de 34px) */
 .etapas::before{
-  content:"";position:absolute;left:5px;top:26px;bottom:34px;width:1.5px;
+  content:"";position:absolute;left:16.25px;top:34px;bottom:40px;width:1.5px;
   background:linear-gradient(180deg,rgba(139,77,232,.42),rgba(33,168,228,.42),rgba(37,211,102,.5));
 }
 .etapa{position:relative;padding:18px 0}
-.etapa::before{
-  content:"";position:absolute;left:-36px;top:24px;
-  width:11px;height:11px;border-radius:50%;
-  background:var(--bg);border:2px solid var(--roxo-claro);
-  box-shadow:0 0 0 5px var(--bg);
+
+/* Marcador: círculo com ícone que representa a etapa */
+.etapa-icone{
+  position:absolute;left:-58px;top:15px;
+  width:34px;height:34px;border-radius:50%;
+  display:grid;place-items:center;
+  background:var(--bg);
+  border:1.5px solid rgba(139,77,232,.55);
+  color:var(--roxo-claro);
+  box-shadow:0 0 0 5px var(--bg),0 0 18px rgba(139,77,232,.22);
 }
-.etapa.is-final::before{
-  border-color:var(--wpp);background:var(--wpp);
-  box-shadow:0 0 0 5px var(--bg),0 0 16px rgba(37,211,102,.7);
+.etapa-icone svg{width:17px;height:17px;display:block}
+
+.etapa.is-final .etapa-icone{
+  border-color:var(--wpp);
+  color:var(--wpp);
+  box-shadow:0 0 0 5px var(--bg),0 0 18px rgba(37,211,102,.45);
 }
 .etapa-time{
   display:inline-block;margin-bottom:6px;
@@ -680,6 +743,133 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
 }
 .garantia h3{font-size:1.1rem;margin-bottom:8px}
 .garantia p{font-size:.92rem;color:var(--txt-2)}
+
+/* ============================================================
+   CARROSSEL DE TEMPLATES
+   ============================================================ */
+.sec-templates{overflow:hidden}
+.sec-templates .sec-head{text-align:center;display:flex;flex-direction:column;align-items:center}
+
+.carrossel{
+  position:relative;margin-top:44px;
+}
+/* fade nas pontas para as páginas surgirem/sumirem suave */
+.carrossel-viewport{
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);
+}
+/* camada externa: recebe o "empurrão" das setas, com transição suave */
+.carrossel-nudge{
+  transform:translateX(0);
+  transition:transform .55s cubic-bezier(.4,0,.2,1);
+  will-change:transform;
+}
+/* camada interna: roda o loop infinito sozinha */
+.carrossel-trilho{
+  display:flex;gap:22px;width:max-content;
+  animation:desliza 70s linear infinite;
+  will-change:transform;
+}
+@keyframes desliza{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+/* para quando o ponteiro está sobre o carrossel */
+.carrossel-viewport:hover .carrossel-trilho{animation-play-state:paused}
+
+.tpl{
+  position:relative;flex:0 0 auto;
+  width:clamp(220px,22vw,300px);height:clamp(380px,42vw,520px);
+  border-radius:var(--r);overflow:hidden;
+  border:1px solid var(--linha);
+  background:rgba(13,16,32,.6);
+  box-shadow:0 16px 40px rgba(0,0,0,.4);
+  cursor:zoom-in;
+  transition:border-color .3s ease,box-shadow .3s ease,transform .3s ease;
+}
+.tpl img{
+  display:block;width:100%;height:auto;min-height:100%;
+  object-fit:cover;object-position:top center;
+}
+/* dica de "clique para ampliar" que surge no hover */
+.tpl::after{
+  content:"";position:absolute;top:12px;right:12px;
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(13,16,32,.72) center/18px no-repeat;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M21 21l-4.3-4.3M11 8v6M8 11h6'/%3E%3C/svg%3E");
+  border:1px solid var(--linha-forte);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  opacity:0;transform:scale(.8);
+  transition:opacity .25s ease,transform .25s ease;
+  pointer-events:none;
+}
+.tpl:hover{
+  border-color:var(--linha-forte);
+  box-shadow:0 22px 54px rgba(97,23,196,.28);
+  transform:translateY(-4px);
+}
+.tpl:hover::after{opacity:1;transform:scale(1)}
+.tpl:focus-visible{outline:2.5px solid var(--azul-claro);outline-offset:3px}
+
+/* setas discretas nas laterais */
+.carrossel-nav{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:3;
+  width:44px;height:44px;border-radius:50%;
+  display:grid;place-items:center;
+  color:var(--txt);
+  background:rgba(13,16,32,.55);
+  border:1px solid var(--linha);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  opacity:.35;cursor:pointer;
+  transition:opacity .25s ease,background .25s ease,border-color .25s ease,transform .25s ease;
+}
+.carrossel:hover .carrossel-nav{opacity:.7}
+.carrossel-nav:hover{opacity:1;background:rgba(20,24,44,.9);border-color:var(--linha-forte)}
+.carrossel-nav:active{transform:translateY(-50%) scale(.92)}
+.carrossel-nav.is-prev{left:clamp(6px,2vw,22px)}
+.carrossel-nav.is-next{right:clamp(6px,2vw,22px)}
+
+/* Lightbox: página ampliada ao clicar na miniatura */
+.lightbox{
+  position:fixed;inset:0;z-index:200;
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(16px,4vw,48px);
+  background:rgba(4,5,12,.86);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  opacity:0;transition:opacity .3s ease;
+}
+.lightbox[hidden]{display:none}
+.lightbox.is-open{opacity:1}
+.lightbox-palco{
+  position:relative;
+  max-width:min(440px,92vw);max-height:92vh;
+  border-radius:var(--r);overflow-y:auto;overflow-x:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+  border:1px solid var(--linha-forte);
+  scrollbar-width:thin;
+  transform:scale(.96);transition:transform .3s cubic-bezier(.22,.8,.3,1);
+}
+.lightbox.is-open .lightbox-palco{transform:scale(1)}
+.lightbox-img{display:block;width:100%;height:auto}
+.lightbox-fechar,
+.lightbox-nav{
+  position:absolute;z-index:2;
+  display:grid;place-items:center;
+  color:var(--txt);border-radius:50%;cursor:pointer;
+  background:rgba(13,16,32,.72);
+  border:1px solid var(--linha-forte);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  transition:background .22s ease,transform .22s ease,border-color .22s ease;
+}
+.lightbox-fechar{top:clamp(12px,3vw,24px);right:clamp(12px,3vw,24px);width:46px;height:46px}
+.lightbox-fechar:hover{background:rgba(30,34,58,.95);transform:rotate(90deg)}
+.lightbox-nav{top:50%;transform:translateY(-50%);width:50px;height:50px}
+.lightbox-nav:hover{background:rgba(30,34,58,.95);border-color:var(--azul-claro)}
+.lightbox-nav.is-prev{left:clamp(10px,3vw,28px)}
+.lightbox-nav.is-next{right:clamp(10px,3vw,28px)}
+.lightbox-nav.is-prev:active{transform:translateY(-50%) scale(.9)}
+.lightbox-nav.is-next:active{transform:translateY(-50%) scale(.9)}
 
 /* ============================================================
    PROVA SOCIAL
@@ -827,13 +1017,17 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
 .wpp-ping{
   position:absolute;inset:0;border-radius:50%;
   background:var(--wpp);opacity:0;
-  animation:ping 2.3s cubic-bezier(0,0,.2,1) infinite;
+  animation:ping 2s cubic-bezier(0,0,.2,1) infinite;
 }
 @keyframes ping{
-  0%{box-shadow:0 0 0 0 rgba(37,211,102,.5)}
-  70%{box-shadow:0 0 0 22px rgba(37,211,102,0)}
+  0%{box-shadow:0 0 0 0 rgba(37,211,102,.7)}
+  70%{box-shadow:0 0 0 34px rgba(37,211,102,0)}
   100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}
 }
+/* leve batida do botão inteiro, acompanhando o ping */
+.wpp-float{animation:wppBeat 2s ease-in-out infinite}
+@keyframes wppBeat{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.wpp-float:hover{animation:none}
 
 .wpp-tip{
   position:absolute;right:calc(100% + 12px);top:50%;transform:translateY(-50%) translateX(8px);
@@ -874,7 +1068,8 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
 
   .tensao-grid{grid-template-columns:1fr;gap:40px}
   .radar-layout{grid-template-columns:1fr;gap:44px}
-  .radar{max-width:330px}
+  /* margem lateral extra: os satélites esquerdo/direito ficam fora do círculo */
+  .radar{max-width:300px;margin-inline:auto}
   .entrega-grid{grid-template-columns:repeat(2,1fr)}
   .depos{grid-template-columns:1fr;max-width:600px;margin:0 auto}
   .equipe{grid-template-columns:1fr;max-width:600px;margin-inline:auto}
@@ -884,13 +1079,19 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
 @media (max-width:640px){
   html{scroll-padding-top:88px}
 
-  /* No celular o CTA vira só o ícone: o menu já leva ao WhatsApp
-     e assim a logo continua legível. */
+  /* radar mais estreito para os satélites laterais não vazarem da tela */
+  .radar{max-width:230px}
+  .radar-sat{padding:7px 9px;border-radius:12px}
+  .sat-2{right:-19%}
+  .sat-4{left:-19%}
+
+  /* No celular escondemos o botão do topo: o menu expandido já leva ao
+     WhatsApp e o botão flutuante fica sempre à mão. */
   .nav{top:10px;width:calc(100% - 20px)}
   .nav-logo img{height:26px}
-  .nav-cta-txt{display:none}
-  .nav-cta{padding:12px;gap:0;border-radius:50%}
-  .nav-inner{padding:8px 8px 8px 14px;gap:10px}
+  .nav-cta{display:none}
+  .nav-toggle{margin-left:auto}
+  .nav-inner{padding:8px 14px;gap:10px}
 
   .hero{padding-top:118px}
   /* no celular a foto sobe para o topo e só ambienta o fundo */
@@ -923,14 +1124,13 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
   .siglas{grid-template-columns:1fr}
   .entrega-grid{grid-template-columns:1fr}
 
-  .addon{flex-direction:column;gap:16px}
-  .addon-mark{width:44px;height:44px;font-size:1.45rem}
   .autor{flex-direction:column;text-align:center;gap:16px}
   .entrega-vitrine figcaption{font-size:.82rem}
 
-  .etapas{padding-left:28px}
-  .etapas::before{left:4px}
-  .etapa::before{left:-28px}
+  .etapas{padding-left:48px}
+  .etapas::before{left:14.25px}
+  .etapa-icone{left:-48px;width:30px;height:30px}
+  .etapa-icone svg{width:15px;height:15px}
 
   .preco{padding:26px 20px}
   .preco-split{grid-template-columns:1fr;gap:16px;padding:18px}
@@ -955,4 +1155,8 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
   }
   .reveal{opacity:1;transform:none}
   .radar-sweep,.pulse-beam,.wpp-ping{display:none}
+  .wpp-float{animation:none}
+  /* sem auto-scroll: vira uma faixa deslizável pelo dedo/mouse */
+  .carrossel-viewport{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .carrossel-trilho{animation:none;transform:none!important}
 }
