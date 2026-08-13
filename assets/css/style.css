@@ -524,6 +524,8 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
   background:rgba(139,77,232,.16);color:var(--roxo-claro);
 }
 .sigla.is-new .sigla-tag{background:rgba(33,168,228,.16);color:var(--azul-claro)}
+.sigla-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.sigla-tags .sigla-tag{margin-bottom:0}
 
 /* Cards do diferencial: borda destacada + tag flutuante no topo */
 .sigla.is-new{
