@@ -874,6 +874,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
 /* ============================================================
    PROVA SOCIAL
    ============================================================ */
+.sec-equipe .sec-head,
 .sec-prova .sec-head{text-align:center;display:flex;flex-direction:column;align-items:center}
 
 .equipe{
