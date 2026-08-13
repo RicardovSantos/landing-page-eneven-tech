@@ -898,6 +898,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
   color:var(--txt);margin-bottom:8px;
 }
 .autor-nome span{font-weight:400;color:var(--azul-claro);font-size:.92rem}
+.autor-frase{font-style:italic;color:var(--txt);font-size:.98rem;margin-bottom:8px}
 .autor-txt p{font-size:.95rem;color:var(--txt-2);max-width:62ch}
 
 .depos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
