@@ -904,7 +904,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
 .autor-frase{font-style:italic;color:var(--txt);font-size:.98rem;margin-bottom:8px}
 .autor-txt p{font-size:.95rem;color:var(--txt-2);max-width:62ch}
 
-.depos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.depos{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .depo{
   padding:26px;border-radius:var(--r);
   background:rgba(18,22,42,.5);
@@ -917,8 +917,18 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-
 .depo blockquote{font-size:.94rem;color:var(--txt-2);line-height:1.65;flex:1}
 .depo figcaption{display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid var(--linha)}
 .depo figcaption img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.depo figcaption .depo-avatar{
+  width:44px;height:44px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--azul-claro);color:#fff;
+  font-family:var(--fd);font-weight:700;font-size:.9rem;
+}
 .depo figcaption span{display:flex;flex-direction:column;font-size:.79rem;color:var(--txt-3)}
 .depo figcaption strong{font-size:.92rem;color:var(--txt);font-family:var(--fd)}
+
+@media (max-width:900px){
+  .depos{grid-template-columns:repeat(2,1fr)}
+}
 
 /* ============================================================
    FAQ
