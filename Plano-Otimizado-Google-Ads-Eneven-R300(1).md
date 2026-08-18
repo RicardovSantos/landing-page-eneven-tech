@@ -8,6 +8,75 @@
 
 ---
 
+## 0. Status de execução (atualizado em 18 de agosto de 2026)
+
+O plano abaixo foi executado. Esta seção registra o que foi de fato configurado, incluindo os pontos em que a execução real ficou diferente da recomendação original (por limitação da interface do Google Ads ou por decisão tomada durante a implementação).
+
+### Página (seção 8) — concluído
+
+- Página exclusiva já publicada em `https://lp.eneven.com.br`, com HTTPS válido e domínio próprio (sem `www`; o `www.lp.eneven.com.br` foi configurado como redirecionamento 301 permanente).
+- Preço, prazo e escopo já estavam unificados (R$ 397, 72h, copy inclusa) — nenhuma correção de conteúdo necessária nesses pontos.
+- Estrutura já seguia o formato enxuto recomendado (hero, diferencial GEO/AEO, entrega, como funciona, investimento, carrossel de projetos, prova social, FAQ, CTA final), sem distrações de outros serviços.
+- Corrigido: inconsistência entre `reviewCount: 4` no schema JSON-LD e apenas 3 depoimentos visíveis — adicionado o 4º depoimento real (Emerson Pr, adaptado de outro material da Eneven) e ajustado o grid para 4 colunas.
+- Corrigido: os 12 `alt` genéricos do carrossel de templates ("Landing page criada pela Eneven Tech") foram substituídos por descrições específicas por projeto (segmento do cliente + diferenciais), identificadas visualmente imagem por imagem.
+
+### Rastreamento (seção 9) — concluído, com uma adaptação
+
+- Google Tag Manager instalado: `GTM-TQBJ7WML`.
+- Google Analytics 4 criado como propriedade separada da `eneven.com.br` (para não misturar tráfego institucional com o da campanha): `G-3F5T7V8ZVF`.
+- O evento de clique no WhatsApp **já existia no código** (`app.js`) sob o nome `clique_whatsapp`, disparando para o `dataLayer` com a seção de origem (`secao_origem`). Em vez de renomear para `whatsapp_click` no código, o mapeamento foi feito dentro do GTM: gatilho de evento personalizado `clique_whatsapp` → tag GA4 de evento `whatsapp_click` com o parâmetro `secao_origem`. Testado e confirmado via Tag Assistant (hit `whatsapp_click` chegando ao GA4 com o parâmetro preenchido).
+- UTMs configurados no nível da campanha do Google Ads (sufixo de URL final), não em cada link manualmente — ver seção "Campanha" abaixo.
+- Níveis 2 e 3 (`qualified_lead`, `sale`) permanecem manuais, como o plano original já previa (registro em planilha/Hub).
+
+### Planejador de Palavras-chave (seção 3) — concluído
+
+Pesquisa rodada com a localização correta (São Paulo + Guarulhos, não Brasil inteiro). Além das 6 palavras técnicas do plano original, também foram testados termos leigos (ex.: "criar página de vendas", "como fazer página de vendas"), já que muitos clientes em potencial não conhecem o termo "landing page". A pesquisa também revelou um risco não previsto no plano original: várias palavras próximas ao tema retornam intenção de **loja virtual/e-commerce** (Nuvemshop, Hotmart, WordPress), que não é o serviço vendido — esses termos foram descartados e viraram negativas adicionais.
+
+**CPC máximo definido: R$ 8,00** (a faixa de lance de topo de página observada foi de R$ 2,60 a R$ 46,18 conforme a palavra; R$ 8 cobre a faixa baixa/média das palavras compatíveis sem participar dos leilões mais caros).
+
+### Campanha no Google Ads — publicada e ativa
+
+|Configuração|Valor real aplicado|
+|---|---|
+|Nome|`Search \| Landing Page \| SP-GRU \| R300`|
+|Status|Ativa (publicada em 18/08/2026)|
+|Objetivo / Meta de conversão|Leads → Cliques de saída (não havia opção exata para "clique no WhatsApp" no assistente; configuração manual da conversão via GA4/GTM, não pelo recurso nativo de conversão de cliques de saída do Ads)|
+|Tipo|Pesquisa (Rede de Display e parceiros de pesquisa desativados)|
+|IA Max|Desativada (personalização de texto e expansão de URL final desligadas)|
+|Locais|São Paulo (capital) + Guarulhos, opção "Presença"|
+|Idioma|Português|
+|Período|18/08/2026 a 02/09/2026 (15 dias — ajustado depois da publicação, que atrasou o início real em relação à data planejada)|
+|Orçamento|R$ 300, **orçamento total da campanha** (a opção esteve disponível, diferente do cenário alternativo previsto no plano)|
+|Lances|Maximizar cliques, CPC máximo R$ 8,00|
+|Programação de anúncios|Seg–sex 8h–20h, sáb 9h–14h, dom pausado|
+|Palavras-chave|8, todas em correspondência exata (ver lista abaixo)|
+|UTMs|Configurados no sufixo de URL final da campanha: `utm_source=google&utm_medium=cpc&utm_campaign=lp_sp_r300&utm_term={keyword}&utm_content={creative}`|
+
+**Palavras-chave finais (correspondência exata):**
+
+```text
+[criação de landing page]
+[landing page profissional]
+[orçamento landing page]
+[desenvolvedor de landing page]
+[criar página de vendas]
+[como fazer página de vendas]
+[como criar página de vendas]
+[página de vendas de alta conversão]
+```
+
+Diferença em relação à seção 6 original: as palavras `[empresa de landing page]` e `[agência de landing page]` do plano não entraram (substituídas pelas variantes leigas de "página de vendas", com CPC mais baixo e volume real confirmado no Planejador). Negativas adicionais recomendadas com base na pesquisa: `loja virtual`, `ecommerce`, `e-commerce`, `nuvemshop`, `hotmart`, `wordpress`, `rd station`, `carrinho`.
+
+**Anúncio**: usa os 12 títulos e as 4 descrições da seção 7 quase sem alteração (pequenos cortes para caber no limite de 30/25 caracteres de título e frases de destaque). Sitelinks apontam para as âncoras reais da página (`#como`, `#geo`, `#investimento`, `#duvidas`) em vez dos textos genéricos do plano original. Recurso de "Preços" adicionado com 3 itens reais (R$ 397 total, entrada de R$ 79,40, restante de R$ 317,60) em vez de incluir itens com preço R$ 0,00. Recurso de "Mensagem" (seção 7, opcional) não foi ativado — depende de verificação do anunciante, que ainda estava pendente no momento da publicação.
+
+### Pendências
+
+- [ ] Confirmar se a verificação do anunciante (nome/CPF, obrigatória para o Google liberar a veiculação real) foi concluída — estava pendente no momento da publicação da campanha.
+- [ ] Certificado SSL de `www.lp.eneven.com.br` — confirmar se já foi emitido (estava pendente no Let's Encrypt/EasyPanel logo após a configuração do DNS).
+- [ ] Seguir a rotina de otimização da seção 10 (dias 1–3: checar termos de pesquisa diariamente e adicionar negativas).
+
+---
+
 ## 1. Veredito profissional
 
 O plano original está correto ao priorizar:
