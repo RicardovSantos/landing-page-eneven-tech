@@ -1,3 +1,10 @@
 .git
 README.md
 PROMPTS-IMAGENS.md
+CLAUDE.md
+Plano-Otimizado-Google-Ads-Eneven-R300(1).md
+
+# Artes originais (PNG/JPEG de origem). Ficam versionadas no repositório como
+# fonte, mas não vão para o container: a página só serve as versões WebP.
+assets/img/*.png
+assets/img/*.jpeg
