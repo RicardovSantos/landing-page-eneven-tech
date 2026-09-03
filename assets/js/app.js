@@ -89,8 +89,8 @@
 
   /* ---------- Rastreio de cliques no WhatsApp ----------
      Cada botão vira um evento com o nome da seção de origem, para você
-     saber no Google Ads / GA4 qual parte da página converteu.
-     Só dispara se gtag ou dataLayer existirem — sem eles, não faz nada. */
+     saber no Meta / GA4 qual parte da página converteu.
+     Cada destino só dispara se existir — sem ele, não faz nada. */
   var secaoDoBotao = function (el) {
     if (el.dataset.origem) return el.dataset.origem;
     var sec = el.closest('section, header, footer');
@@ -113,6 +113,9 @@
       }
       if (Array.isArray(window.dataLayer)) {
         window.dataLayer.push({ event: 'clique_whatsapp', secao_origem: origem });
+      }
+      if (typeof window.fbq === 'function') {
+        window.fbq('track', 'Contact', { content_name: origem });
       }
     });
   });
