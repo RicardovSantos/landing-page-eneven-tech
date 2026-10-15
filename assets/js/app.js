@@ -265,3 +265,26 @@
     obsRodape.observe(rodape);
   }
 })();
+
+/* GA4: rastreamento de cliques em CTAs, WhatsApp e checkout. */
+document.addEventListener('click', function (event) {
+  var el = event.target.closest('a[href], button');
+  if (!el) return;
+  var href = el.getAttribute('href') || '';
+  var url;
+  try { url = new URL(href, location.href); } catch (e) { url = null; }
+  var host = url ? url.hostname.toLowerCase() : '';
+  var label = (el.innerText || el.getAttribute('aria-label') || el.textContent || '').trim().replace(/\\s+/g, ' ').slice(0, 100);
+  var whatsapp = /^(wa\\.me|api\\.whatsapp\\.com|web\\.whatsapp\\.com|chat\\.whatsapp\\.com)$/.test(host);
+  var checkout = /(^|\\.)(kiwify\\.com\\.br|kiwify\\.com|pay\\.kiwify\\.com\\.br)$/.test(host) || /checkout|comprar|adquirir|garantir/i.test(label);
+  var actionable = el.tagName === 'BUTTON' || /btn|button|cta/i.test(el.className || '') || el.hasAttribute('role') && el.getAttribute('role') === 'button';
+  if (!whatsapp && !checkout && !actionable) return;
+  if (typeof window.gtag !== 'function') return;
+  window.gtag('event', whatsapp ? 'click_whatsapp' : checkout ? 'click_checkout' : 'click_cta', {
+    link_url: url ? url.href : '',
+    link_text: label,
+    button_id: el.id || '',
+    page_path: location.pathname,
+    transport_type: 'beacon'
+  });
+});
